@@ -15,21 +15,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-      - name: Restore cached npm dependencies
-        id: cache-dependencies-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            node_modules
-          key: npm-dependencies-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm install --frozen-lockfile
-      - name: Cache npm dependencies
-        id: cache-dependencies-save
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            node_modules
-          key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
       - uses: nrwl/nx-set-shas@v3
       # This line is needed for nx affected to work when CI is running on a PR
       - run: git branch --track main origin/main
