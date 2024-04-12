@@ -10,7 +10,9 @@
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nx/angular:library": { "unitTestRunner": "jest" },
+    "@nx/angular:library": { 
+      "unitTestRunner": "jest" 
+    },
     "@nx/angular": {
       "convert-tslint-to-eslint": { "removeTSLintIfNoMoreTSLintTargets": true }
     },
