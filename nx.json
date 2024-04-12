@@ -10,7 +10,9 @@
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nx/angular:library": { "unitTestRunner": "jest" },
+    "@nx/angular:library": { 
+      "unitTestRunner": "jest" 
+    },
     "@nx/angular": {
       "convert-tslint-to-eslint": { "removeTSLintIfNoMoreTSLintTargets": true }
     },
@@ -55,7 +57,10 @@
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "sharedGlobals": [
+      "{workspaceRoot}/babel.config.json",
+      "{workspaceRoot}/.github/workflows/ci.yml"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
