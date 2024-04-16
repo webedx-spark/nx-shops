@@ -10,8 +10,8 @@
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nx/angular:library": { 
-      "unitTestRunner": "jest" 
+    "@nx/angular:library": {
+      "unitTestRunner": "jest"
     },
     "@nx/angular": {
       "convert-tslint-to-eslint": { "removeTSLintIfNoMoreTSLintTargets": true }
@@ -71,5 +71,17 @@
     ]
   },
   "parallel": 1,
-  "nxCloudAccessToken": "MzViNTQyMTgtZjk2YS00MjY2LWI2MjktNWZlNTdiOWQxMjM3fHJlYWQtd3JpdGU="
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@pellegrims/nx-remotecache-s3",
+      "options": {
+        "cacheableOperations": ["build", "test", "lint", "e2e", "jest"],
+        "bucket": "coursera-debs-testing",
+        "prefix": "nx-remote-caching/",
+        "region": "us-east-1",
+        "forcePathStyle": true,
+        "readOnly": false
+      }
+    }
+  }
 }

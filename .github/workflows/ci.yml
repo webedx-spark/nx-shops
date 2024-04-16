@@ -5,21 +5,35 @@ on:
       - main
   pull_request:
 
+permissions:
+  id-token: write # This is required for requesting the JWT
+
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      # Configure AWS Credentials
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.AWS_ACCESS_IAM_ROLE }}
+          role-session-name: web_gha_aws_via_federated_oidc
+          aws-region: us-east-1
+      # Checkout Repo
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      # Setup Pnpm
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+      # Install dependencies
       - run: pnpm install --frozen-lockfile
+      # Set shas for nx
       - uses: nrwl/nx-set-shas@v3
-      # This line is needed for nx affected to work when CI is running on a PR
       - run: git branch --track main origin/main
         if: ${{ github.event_name == 'pull_request' }}
-
+      # Run lint test build on affected
       - run: pnpm nx affected -t lint test build --parallel=3
+      # Run e2e tests on affected
       - run: pnpm nx affected -t e2e --parallel=1

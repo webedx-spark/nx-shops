@@ -46,6 +46,7 @@
     "@nx/web": "17.1.2",
     "@nx/webpack": "17.1.2",
     "@nx/workspace": "17.1.2",
+    "@pellegrims/nx-remotecache-s3": "^6.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@svgr/webpack": "^8.0.1",
     "@swc-node/register": "~1.6.7",
